@@ -35,7 +35,7 @@ df_cos = pd.DataFrame(cos, index=df_pivot.index, columns=df_pivot.index)
 filme_select = st.text_input(label='Digite aqui o filme que gostaria de dar como exemplo')
 filme_select = filme_select.upper()
 
-if filme_select is not null:
+if filme_select is not None:
   recomendacao = df_cos.loc[filme_select].sort_values(ascending=False)[1:6]
   recomendacao.index.name = 'Recomendação'
   recomendacao.name = 'Nível de similaridade'
