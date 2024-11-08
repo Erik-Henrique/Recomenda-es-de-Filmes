@@ -35,15 +35,18 @@ df_cos = pd.DataFrame(cos, index=df_pivot.index, columns=df_pivot.index)
 filme_select = st.text_input(label='Digite aqui o filme que gostaria de dar como exemplo')
 filme_select = filme_select.upper()
 
-if filme_select is not None:
-  recomendacao = df_cos.loc[filme_select].sort_values(ascending=False)[1:6]
-  recomendacao.index.name = 'Recomendação'
-  recomendacao.name = 'Nível de similaridade'
-  
-  col1, col2, col3, col4 = st.columns(4)
-  with col1:
-      st.dataframe(recomendacao)
-  with col2:
-      st.write('##### Estes são os filmes indicados para você assistir. Divirta-se.')
+if filme_select is not None and filme_select in df_cos.index:
+    # Obtenha as recomendações, ordenando pela similaridade e pegando os 5 mais similares (excluindo o primeiro, que é o próprio filme)
+    recomendacao = df_cos.loc[filme_select].sort_values(ascending=False)[1:6]
+    recomendacao.index.name = 'Recomendação'
+    recomendacao.name = 'Nível de similaridade'
+    
+    # Divida o layout em quatro colunas e mostre as recomendações na primeira coluna
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.dataframe(recomendacao)
+    with col2:
+        st.write('##### Estes são os filmes indicados para você assistir. Divirta-se!')
 else: 
-  st.write('Por favor diga algum filmes que gostou e gostaria de ver recomendações parecidas.')
+    # Exiba uma mensagem se nenhum filme for selecionado
+    st.write('Por favor, informe um filme que você gostou e gostaria de ver recomendações parecidas.')
