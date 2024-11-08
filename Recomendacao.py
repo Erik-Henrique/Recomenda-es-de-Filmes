@@ -49,4 +49,4 @@ if filme_select is not None and filme_select in df_cos.index:
         st.write('##### Estes são os filmes indicados para você assistir. Divirta-se!')
 else: 
     # Exiba uma mensagem se nenhum filme for selecionado
-    st.write('Por favor, informe um filme que você gostou e gostaria de ver recomendações parecidas.')
+    st.write('### Por favor, informe acima um filme que você gostou e gostaria de ver recomendações parecidas.')
